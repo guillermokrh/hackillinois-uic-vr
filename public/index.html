@@ -93,8 +93,29 @@ WebVRConfig = {
   -->
 <script src="lib/webvr-manager.js"></script>
 
+<!-- JQuery -->
+<script src="lib/jquery-2.2.0.min.js"></script>
 
 <script>
+    
+           /****** Import Data from API *********/
+   var results_string;
+   $.ajax({
+       url: 'http://54.173.55.82/enterprise/accounts?key=f8b02f3f814fae54a79f38d34ff7c0a5',
+       success: function(results){
+            
+            results_string = results;
+            console.log('printing');
+            console.log(results_string);
+            for (var i= 0; i < results_string.length; i++){
+                console.log(results_string);
+            }
+       }
+   });
+   
+   //console.log(results_string[0]);
+   /****** End of import Data *****/ 
+    
 // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
 // Only enable it if you actually need to.
 var renderer = new THREE.WebGLRenderer({antialias: true});
@@ -150,7 +171,8 @@ var params = {
 };
 var manager = new WebVRManager(renderer, effect, params);
 
-// GuillermoKRH
+//var height1 = array[0].
+//************ Wallace Development Section ******************* /
 function createCube(width, height, length, x, y, z){
     var geometry0 = new THREE.BoxGeometry(width, height, length);
     var material0 = new THREE.MeshNormalMaterial();
@@ -164,7 +186,7 @@ function createCube(width, height, length, x, y, z){
 }
 
 
-var cube1 = new createCube(0.1, 0.1, 0.1, 0, 0, -2);
+var cube1 = new createCube(0.1, 0.1,0.1, 0.1, 0, 0, -2);
 
 
 
@@ -172,6 +194,9 @@ var cube1 = new createCube(0.1, 0.1, 0.1, 0, 0, -2);
 
 // Add cube mesh to your three.js scene
 scene.add(cube1);
+
+
+/****** Wallace Dev Section End ***************/
 
 // Request animation frame loop function
 var lastRender = 0;
