@@ -109,6 +109,10 @@ var scene = new THREE.Scene();
 // Create a three.js camera.
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 
+camera.position.z = +2;
+camera.position.x = 0;
+camera.position.y = +1;
+
 // Apply VR headset positional data to camera.
 var controls = new THREE.VRControls(camera);
 
@@ -130,7 +134,7 @@ function onTextureLoaded(texture) {
   var geometry = new THREE.BoxGeometry(boxWidth, boxWidth, boxWidth);
   var material = new THREE.MeshBasicMaterial({
     map: texture,
-    color: 0x01BE00,
+    color: 0x01B00,
     side: THREE.BackSide
   });
 
@@ -147,17 +151,57 @@ var params = {
 var manager = new WebVRManager(renderer, effect, params);
 
 // GuillermoKRH
-// Create 3D objects.
-var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+
+// Create 3D objects.                      ^^^
+var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
 var material = new THREE.MeshNormalMaterial();
 var cube = new THREE.Mesh(geometry, material);
 
 // Position cube mesh
-cube.position.z = -1;
+cube.position.z = -2;
 
+//create another cube
+var geometry2 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+var material2 = new THREE.MeshNormalMaterial();
+var cube2 = new THREE.Mesh(geometry2, material2);
+
+cube2.position.y = -2;
+
+//create cube 3
+var geometry3 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+var material3 = new THREE.MeshNormalMaterial();
+var cube3 = new THREE.Mesh(geometry3, material3);
+
+cube3.position.y = +2;
+
+//create cube 4
+var geometry4 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+var material4 = new THREE.MeshNormalMaterial();
+var cube4 = new THREE.Mesh(geometry4, material4);
+
+cube4.position.z = 0;
+
+//create cube 5
+var geometry5 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+var material5 = new THREE.MeshNormalMaterial();
+var cube5 = new THREE.Mesh(geometry5, material5);
+
+cube5.position.x = -2;
+
+//create cube 6
+var geometry6 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+var material6 = new THREE.MeshNormalMaterial();
+var cube6 = new THREE.Mesh(geometry6, material6);
+
+cube6.position.x = +2;
 
 // Add cube mesh to your three.js scene
 scene.add(cube);
+scene.add(cube2);
+scene.add(cube3);
+scene.add(cube4);
+scene.add(cube5);
+scene.add(cube6);
 
 // Request animation frame loop function
 var lastRender = 0;
@@ -167,6 +211,11 @@ function animate(timestamp) {
 
   // Apply rotation to cube mesh
   cube.rotation.y += delta * 0.0006;
+  cube2.rotation.y += delta * 0.0006;
+  cube3.rotation.y += delta * 0.0006;
+  cube4.rotation.y += delta * 0.0006;
+  cube5.rotation.y += delta * 0.0006;
+  cube6.rotation.y += delta * 0.0006;
 
   // Update VR headset position and apply to camera.
   controls.update();
