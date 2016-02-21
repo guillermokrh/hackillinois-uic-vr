@@ -111,21 +111,43 @@ WebVRConfig = {
 				});
 			});
 
+            var customerList;
+            var customerNameDaveBautista = 'Dave Bautista';
+            var customerIDDaveBautista = '56c66be5a73e492741507281';
+            var customerNameScarlettJohansson = 'Scarlett Johansson'
+            var customerIDScarlettJohansson = '56c66be5a73e492741507282';
+            var customerNameBenedictCumberbatch = 'Benedict Cumberbatch';
+            var customerIDBenedictCumberbatch = '56c66be5a73e492741507283';
+
+      var accountBalance = 0;
+      var daveAccounts;
       function accountDemo (apikey, account) {
 			console.log('Account Demo');
-			var custAccount = account.initWithKey(apikey);
-			var custID = '56c66be5a73e492741507281';
-			var accID = '56c66be6a73e492741507b4d';
-			var newAccount = "{\"nickname\":\"Mr. Stanislaus's Account\"}";
+			var custAccount = account.initWithKey(apikey); //Need API Key
+			var custID = customerIDDaveBautista;
+//			var accID = '56c66be6a73e492741507b4d';
+			var newAccount = "{\"nickname\":\"My New Account Account\"}";
 			var sampleAccount = "{\"balance\":50,\"nickname\":\"Lola Account\",\"rewards\":2,\"type\":\"Checking\"}";
+            
+//            accountBalance = parseFloat(custAccount.getAccountById(accID).balance).toFixed(2);
+//            console.log("account balance:" + accountBalance);
 
 			console.log("[Account - Get All Accounts] : Sample Account Nickname: (" + custAccount.getAllAccounts()[0].nickname + ")");
+            daveAccounts = custAccount.getAllAccounts();
+            for (var i = 0; i < 17; i++){
+                console.log("Dave's account (nickname): " + daveAccounts[i].nickname);
+                console.log("Dave's account (type): " + daveAccounts[i].type);
+                console.log("Dave's account (balance): " + daveAccounts[i].balance);
+            }
+            
 			console.log("[Account - Get All By Type] : " + custAccount.getAllByType('Checking')[0].type);
 			console.log("[Account - Get Customer (Prior Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
-			console.log("[Account - Updating Stanislaus's Account] - response code: " + custAccount.updateAccount(accID, newAccount));
 			console.log("[Account - Get Customer (Post Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
 			console.log("[Account - Create Sample for Miss. Stanislaus's Account]:  response" + custAccount.createAccount(custID, sampleAccount));
-			console.log("[Account - Get One] : Account Balance $" + parseFloat(custAccount.getAccountById(accID).balance).toFixed(2));
+            
+            /*Account ID*/
+//			console.log("[Account - Get One] : Account Balance $" + parseFloat(custAccount.getAccountById(accID).balance).toFixed(2));
+//            console.log("[Account - Updating Stanislaus's Account] - response code: " + custAccount.updateAccount(accID, newAccount));
 		}
 
    
