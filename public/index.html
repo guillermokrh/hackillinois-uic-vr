@@ -130,9 +130,9 @@ var scene = new THREE.Scene();
 // Create a three.js camera.
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 
-camera.position.z = +2;
+camera.position.z = 0;
 camera.position.x = 0;
-camera.position.y = +1;
+camera.position.y = 0;
 
 // Apply VR headset positional data to camera.
 var controls = new THREE.VRControls(camera);
@@ -179,21 +179,32 @@ function createCube(width, height, length, x, y, z){
     var cube0 = new THREE.Mesh(geometry0, material0);
     
     cube0.position.x = x;
-    cube0.position.y = y;
+    cube0.position.y = +height/2 -0.5;
     cube0.position.z = z;
     
     return cube0;
 }
 
 
-var cube1 = new createCube(0.1, 0.1,0.1, 0.1, 0, 0, -2);
 
+heightArr = [ 1, 2, 3, 8, 0.1, 1, 2, 2, 2, 3, 4, 6];
 
+//function createSide(heightArr){
 
+    var cube1 = new createCube(0.1, 0.1,0.1, 0.1, 0, 0, -2);
 
+    var i;
+    for (i = 0; i < 11; i++){
+        cube1[i] = new createCube (0.05,heightArr[i],0.05,i/10-0.5,0-0.5,0-1);
+        
+        scene.add(cube1[i]);
+    }
+  //  return;
 
-// Add cube mesh to your three.js scene
-scene.add(cube1);
+//}
+
+//createSide(heightArr);
+
 
 
 /****** Wallace Dev Section End ***************/
@@ -204,9 +215,12 @@ function animate(timestamp) {
   var delta = Math.min(timestamp - lastRender, 500);
   lastRender = timestamp;
 
-  // Apply rotation to cube mesh
-  cube1.rotation.y += delta * 0.0006;
+  var i;
 
+  for ( i = 0; i< 11; i++){
+  // Apply rotation to cube mesh
+    cube1[i].rotation.y += delta * 0.0006;
+  }
   // Update VR headset position and apply to camera.
   controls.update();
 
