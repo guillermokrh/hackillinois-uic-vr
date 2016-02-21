@@ -96,25 +96,41 @@ WebVRConfig = {
 <!-- JQuery -->
 <script src="lib/jquery-2.2.0.min.js"></script>
 
+<!-- Capital 1 -->
+    <script data-main="lib/capital_one" src="lib/require-jquery.js"></script>
+
 <script>
-    
-           /****** Import Data from API *********/
-   var results_string;
-   $.ajax({
-       url: 'http://54.173.55.82/enterprise/accounts?key=f8b02f3f814fae54a79f38d34ff7c0a5',
-       success: function(results){
-            
-            results_string = results;
-            console.log('printing');
-            console.log(results_string);
-            for (var i= 0; i < results_string.length; i++){
-                console.log(results_string);
-            }
-       }
-   });
+
+    /*Beginning of importing data */
+	$(function(){
+
+				require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase) {
+
+					var apikey = 'f8b02f3f814fae54a79f38d34ff7c0a5';  //our personal API key
+				    accountDemo(apikey, account); // No Purchases for existing accounts
+				});
+			});
+
+      function accountDemo (apikey, account) {
+			console.log('Account Demo');
+			var custAccount = account.initWithKey(apikey);
+			var custID = '56c66be5a73e492741507281';
+			var accID = '56c66be6a73e492741507b4d';
+			var newAccount = "{\"nickname\":\"Mr. Stanislaus's Account\"}";
+			var sampleAccount = "{\"balance\":50,\"nickname\":\"Lola Account\",\"rewards\":2,\"type\":\"Checking\"}";
+
+			console.log("[Account - Get All Accounts] : Sample Account Nickname: (" + custAccount.getAllAccounts()[0].nickname + ")");
+			console.log("[Account - Get All By Type] : " + custAccount.getAllByType('Checking')[0].type);
+			console.log("[Account - Get Customer (Prior Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
+			console.log("[Account - Updating Stanislaus's Account] - response code: " + custAccount.updateAccount(accID, newAccount));
+			console.log("[Account - Get Customer (Post Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
+			console.log("[Account - Create Sample for Miss. Stanislaus's Account]:  response" + custAccount.createAccount(custID, sampleAccount));
+			console.log("[Account - Get One] : Account Balance $" + parseFloat(custAccount.getAccountById(accID).balance).toFixed(2));
+		}
+
    
-   //console.log(results_string[0]);
-   /****** End of import Data *****/ 
+//    /****** End of import Data *****/ 
+
     
 // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
 // Only enable it if you actually need to.
