@@ -186,8 +186,8 @@ function createCube(width, height, length, x, y, z){
 }
 
 
-
-heightArr = [ 1, 2, 3, 8, 0.1, 1, 2, 2, 2, 3, 4, 6];
+var fraction1 = 10;
+heightArr1 = [ 1, 2, 3, 8, 0.1, 1, 2, 2, 2, 3, 4, 6];
 
 //function createSide(heightArr){
 
@@ -195,7 +195,7 @@ heightArr = [ 1, 2, 3, 8, 0.1, 1, 2, 2, 2, 3, 4, 6];
 
     var i;
     for (i = 0; i < 11; i++){
-        cube1[i] = new createCube (0.05,heightArr[i],0.05,i/10-0.5,0-0.5,0-1);
+        cube1[i] = new createCube (0.05,heightArr1[i]/fraction1,0.05,i/10-0.5,0-0.5,0-1);
         
         scene.add(cube1[i]);
     }
