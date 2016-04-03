@@ -118,200 +118,196 @@ WebVRConfig = {
                     cube1[i] = new createCube(0.05,daveBalances[i]/FRACTION_OFFSET,0.05,i/10-0.5,0-0.5,0-1); 
                     scene.add(cube1[i]);
                 }
-                
-                var i;
 
-        /* Second Customer: Louis XVI */
-        var heightArr2 = [ 37950,17656,13551,34896,45469,36462,50,50,50,50,50];
-        var cube2 = new createCube(0.1, 0.1, 0.1, 0, 0, 0);
+                /* Second Customer: Louis XVI */
+                var heightArr2 = [ 37950,17656,13551,34896,45469,36462,50,50,50,50,50];
+                var cube2 = new createCube(0.1, 0.1, 0.1, 0, 0, 0);
 
-        //create graphs for second customer
-        for (i = 0, j = 25; i < 11; i++, j++){
-            cube2[i] = new createCube (0.05,daveBalances[j]/FRACTION_OFFSET,0.05,0-1,0-0.5,0.5-i/10); 
-            scene.add(cube2[i]);
-        }
+                //create graphs for second customer
+                for (i = 0, j = 25; i < 11; i++, j++){
+                    cube2[i] = new createCube (0.05,daveBalances[j]/FRACTION_OFFSET,0.05,0-1,0-0.5,0.5-i/10); 
+                    scene.add(cube2[i]);
+                }
 
-        /*Third Customer: Bill Gates*/
-        var heightArr3 = [ 37950,17656,13551,34896,45469,36462,50,50,50,50,50];
-        var cube3 = new createCube(0.1, 0.1,0.1, +2, 0, 0);
+                /*Third Customer: Bill Gates*/
+                var heightArr3 = [ 37950,17656,13551,34896,45469,36462,50,50,50,50,50];
+                var cube3 = new createCube(0.1, 0.1,0.1, +2, 0, 0);
 
-        for (i = 0, j = 75; i < 11; i++, j++){
-            cube3[i] = new createCube (0.05,daveBalances[j]/FRACTION_OFFSET,0.05, +1, 0-0.5, -0.5+i/10); 
-            scene.add(cube3[i]);
-        }
+                for (i = 0, j = 75; i < 11; i++, j++){
+                    cube3[i] = new createCube (0.05,daveBalances[j]/FRACTION_OFFSET,0.05, +1, 0-0.5, -0.5+i/10); 
+                    scene.add(cube3[i]);
+                }
         
-        /*Fourth Customer: Jane Doe*/
-        var heightArr4 = [ 37950,17656,13551,34896,45469,36462,50,50,50,50,50];
-        var cube4 = new createCube(0.1, 0.1,0.1, -4, 0, 0);
+                /*Fourth Customer: Jane Doe*/
+                var heightArr4 = [ 37950,17656,13551,34896,45469,36462,50,50,50,50,50];
+                var cube4 = new createCube(0.1, 0.1,0.1, -4, 0, 0);
 
-        for (i = 0, j = 75; i < 11; i++, j++){
-            cube4[i] = new createCube(0.05,daveBalances[i]/FRACTION_OFFSET,0.05,i/10-0.5,0-0.5,1);
-            scene.add(cube4[i]);
-        }
+                for (i = 0, j = 75; i < 11; i++, j++){
+                    cube4[i] = new createCube(0.05,daveBalances[i]/FRACTION_OFFSET,0.05,i/10-0.5,0-0.5,1);
+                    scene.add(cube4[i]);
+                }
         
+                /****** Wallace Dev Section End ***************/
 
-/****** Wallace Dev Section End ***************/
+                // Request animation frame loop function
+                var lastRender = 0;
+                function animate(timestamp) {
+                    var delta = Math.min(timestamp - lastRender, 500);
+                    lastRender = timestamp;
 
-// Request animation frame loop function
-var lastRender = 0;
-function animate(timestamp) {
-  var delta = Math.min(timestamp - lastRender, 500);
-  lastRender = timestamp;
-
-  var i;
-
-
-  for ( i = 0; i< daveBalances.length; i++){
-  // Apply rotation to cube mesh
-    cube1[i].rotation.y += delta * 0.0006;
-    cube1[i].position.x -= .002;
-  }
-  for ( i = 0; i< 11; i++){
-  // Apply rotation to cube mesh
-    cube2[i].rotation.y += delta * 0.0006;
-  }
-  for ( i = 0; i< 11; i++){
-  // Apply rotation to cube mesh
-    cube3[i].rotation.y += delta * 0.0006;
-    cube4[i].rotation.y += delta * 0.0006;
-  }
-  // Update VR headset position and apply to camera.
-  controls.update();
-
-  // Render the scene through the manager.
-  manager.render(scene, camera, timestamp);
-
-  requestAnimationFrame(animate);
-}
-
-                // Kick off animation loop
-                animate(performance ? performance.now() : Date.now());    
+                    for ( i = 0; i< daveBalances.length; i++){
+                        // Apply rotation to cube mesh
+                        cube1[i].rotation.y += delta * 0.0006;
+                        cube1[i].position.x -= .002;
+                    }
                 
-	    	});
-	});
+                    for ( i = 0; i< 11; i++){
+                        // Apply rotation to cube mesh
+                        cube2[i].rotation.y += delta * 0.0006;
+                    }
+                
+                    for ( i = 0; i< 11; i++){
+                        // Apply rotation to cube mesh
+                        cube3[i].rotation.y += delta * 0.0006;
+                        cube4[i].rotation.y += delta * 0.0006;
+                    }
+                
+                    // Update VR headset position and apply to camera.
+                    controls.update();
 
+                    // Render the scene through the manager.
+                    manager.render(scene, camera, timestamp);
 
-      var customerIDScarlettJohansson = '56c66be5a73e492741507282';
-      var customerIDBenedictCumberbatch = '56c66be5a73e492741507283';
-      var customerIDBenedictArnold = '56c96de27742719f0e4dd529';
-      var customerIDLouisXVI = '56c970987742719f0e4dd539';
-      var customerIDBillGates = '56c970fb7742719f0e4dd53b';
+                    requestAnimationFrame(animate);
+                }
 
-      var accountBalance = 0;
-      //var daveAccounts;
-      var daveBalances = [];
-      function accountDemo (apikey, account) {
-			var custAccount = account.initWithKey(apikey); //Need API Key
-			var custID = customerIDBenedictCumberbatch;
+            // Kick off animation loop
+            animate(performance ? performance.now() : Date.now());    
+                
+	    	}); //end of require function
+	}); //end of $() function
 
-			console.log("[Account - Get All Accounts] : Sample Account Nickname: (" + custAccount.getAllAccounts()[0].nickname + ")");
-            var allAccounts = custAccount.getAllAccounts();
-            console.log("number of accounts"+ allAccounts.length);
-            console.log("all accounts info: ", allAccounts);
-            for (var i = 120; i < allAccounts.length; i++){
-//                console.log("Dave's account (nickname): " + allAccounts[i].nickname);
-//                console.log("Dave's account (type): " + allAccounts[i].type);
-//                console.log("Dave's account (balance): " + allAccounts[i].balance);
-//                console.log("Dave's account (customer ID): " + allAccounts[i].customer_id);
-                daveBalances.push(allAccounts[i].balance);
-            }
+    var customerIDScarlettJohansson = '56c66be5a73e492741507282';
+    var customerIDBenedictCumberbatch = '56c66be5a73e492741507283';
+    var customerIDBenedictArnold = '56c96de27742719f0e4dd529';
+    var customerIDLouisXVI = '56c970987742719f0e4dd539';
+    var customerIDBillGates = '56c970fb7742719f0e4dd53b';
+
+    var accountBalance = 0;
+    var daveBalances = [];
+    
+    function accountDemo (apikey, account) {
+		var custAccount = account.initWithKey(apikey); //Need API Key
+		var custID = customerIDBenedictCumberbatch;
+
+		console.log("[Account - Get All Accounts] : Sample Account Nickname: (" + custAccount.getAllAccounts()[0].nickname + ")");
+        var allAccounts = custAccount.getAllAccounts();
+        console.log("number of accounts"+ allAccounts.length);
+        console.log("all accounts info: ", allAccounts);     
+            
+        for (var i = 120; i < allAccounts.length; i++){
+//          console.log("Dave's account (nickname): " + allAccounts[i].nickname);
+//          console.log("Dave's account (type): " + allAccounts[i].type);
+//          console.log("Dave's account (balance): " + allAccounts[i].balance);
+//          console.log("Dave's account (customer ID): " + allAccounts[i].customer_id);
+            daveBalances.push(allAccounts[i].balance);
+        }
             
 //			console.log("[Account - Get All By Type] : " + custAccount.getAllByType('Checking')[0].type);
 //			console.log("[Account - Get Customer (Prior Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
 //			console.log("[Account - Get Customer (Post Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
            
-		}
+    } //end of accountDemo function
 
    
 //    /****** End of import Data *****/ 
 
    
-        console.log("type of" + typeof(daveBalances));
+    console.log("type of" + typeof(daveBalances));
         //console.log(daveBalances);
 //    for (var i = 0; i < daveBalances.length; i++){
 //         console.log("Account Balance:" + daveBalances[i]);
 //    }
-// Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
-// Only enable it if you actually need to.
-var renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setPixelRatio(window.devicePixelRatio);
+    // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
+    // Only enable it if you actually need to.
+    var renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer.setPixelRatio(window.devicePixelRatio);
 
-// Append the canvas element created by the renderer to document body element.
-document.body.appendChild(renderer.domElement);
+    // Append the canvas element created by the renderer to document body element.
+    document.body.appendChild(renderer.domElement);
 
-// Create a three.js scene.
-var scene = new THREE.Scene();
+    // Create a three.js scene.
+    var scene = new THREE.Scene();
 
-// Create a three.js camera.
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+    // Create a three.js camera.
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 
-camera.position.z = 0;
-camera.position.x = 0;
-camera.position.y = 0;
+    camera.position.z = 0;
+    camera.position.x = 0;
+    camera.position.y = 0;
 
-// Apply VR headset positional data to camera.
-var controls = new THREE.VRControls(camera);
+    // Apply VR headset positional data to camera.
+    var controls = new THREE.VRControls(camera);
 
-// Apply VR stereo rendering to renderer.
-var effect = new THREE.VREffect(renderer);
-effect.setSize(window.innerWidth, window.innerHeight);
-
-
-// Add a repeating grid as a skybox.
-var boxWidth = 5;
-var loader = new THREE.TextureLoader();
-loader.load('img/box.png', onTextureLoaded);
-
-function onTextureLoaded(texture) {
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(boxWidth, boxWidth);
-
-  var geometry = new THREE.BoxGeometry(boxWidth, boxWidth, boxWidth);
-  var material = new THREE.MeshBasicMaterial({
-    map: texture,
-    color: 0xccccff,
-    //color: 0xf08080,
-    side: THREE.BackSide
-  });
-
-  var skybox = new THREE.Mesh(geometry, material);
-  scene.add(skybox);
-}
+    // Apply VR stereo rendering to renderer.
+    var effect = new THREE.VREffect(renderer);
+    effect.setSize(window.innerWidth, window.innerHeight);
 
 
-// Create a VR manager helper to enter and exit VR mode.
-var params = {
-  hideButton: false, // Default: false.
-  isUndistorted: false // Default: false.
-};
-var manager = new WebVRManager(renderer, effect, params);
+    // Add a repeating grid as a skybox.
+    var boxWidth = 5;
+    var loader = new THREE.TextureLoader();
+    loader.load('img/box.png', onTextureLoaded);
 
-//var height1 = array[0].
+    function onTextureLoaded(texture) {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(boxWidth, boxWidth);
+
+        var geometry = new THREE.BoxGeometry(boxWidth, boxWidth, boxWidth);
+        var material = new THREE.MeshBasicMaterial({
+            map: texture,
+            color: 0xccccff,
+            side: THREE.BackSide
+        });
+
+        var skybox = new THREE.Mesh(geometry, material);
+        scene.add(skybox);
+    }
+
+
+    // Create a VR manager helper to enter and exit VR mode.
+    var params = {
+      hideButton: false, // Default: false.
+      isUndistorted: false // Default: false.
+    };
+    
+    var manager = new WebVRManager(renderer, effect, params);
+
 //************ Wallace Development Section ******************* /
-function createCube(width, height, length, x, y, z){
-    var geometry0 = new THREE.BoxGeometry(width, height, length);
-    var material0 = new THREE.MeshNormalMaterial();
-    var cube0 = new THREE.Mesh(geometry0, material0);
+    function createCube(width, height, length, x, y, z){
+        var geometry0 = new THREE.BoxGeometry(width, height, length);
+        var material0 = new THREE.MeshNormalMaterial();
+        var cube0 = new THREE.Mesh(geometry0, material0);
     
-    cube0.position.x = x;
-    cube0.position.y = +height/2 -0.5;
-    cube0.position.z = z;
+        cube0.position.x = x;
+        cube0.position.y = +height/2 -0.5;
+        cube0.position.z = z;
     
-    return cube0;
-}
+        return cube0;
+    }
 
 
 
 
-// Reset the position sensor when 'z' pressed.
-function onKey(event) {
-  if (event.keyCode == 90) { // z
-    controls.resetSensor();
-  }
-}
+    // Reset the position sensor when 'z' pressed.
+    function onKey(event) {
+        if (event.keyCode == 90) { // z
+            controls.resetSensor();
+        }
+    }
 
-window.addEventListener('keydown', onKey, true);
+    window.addEventListener('keydown', onKey, true);
 
 </script>
 
